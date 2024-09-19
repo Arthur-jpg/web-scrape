@@ -3,78 +3,115 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
-import pywhatkit
 import time
-from datetime import datetime, date
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from selenium.webdriver.support.ui import Select
 
+# Listas de cores e elementos
 listaSlide = ['White', 'Ultra Black', 'Mint']
 listaGrafiato = []
 listaLaufen = []
 
-# Load environment variables from the .env file
+# Carregar variáveis de ambiente
 load_dotenv()
 
-# Now you can access the variables
 email = os.getenv("EMAIL")
 senha = os.getenv("SENHA")
+slide = os.getenv("SLIDE")
 grafiato = os.getenv("GRAFIATO")
 laufen = os.getenv("LAUFEN")
-slide = os.getenv("SLIDE")
 
-#options
+# Configurações do WebDriver
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 options.add_argument('--ignore-certificate-errors')
 
-#variaveis
+# Variáveis de elementos HTML
 EMAILFIELD = (By.ID, "ELOGIN")
 PASSWORDFIELD = (By.ID, "ESENHA")
 BOTAOLOGIN = (By.CLASS_NAME, "col-xs-12")
-COOKIES = (By.ID, "cn-accept-cookie")
 BARRAPESQUISA = (By.ID, "EPESQUISA")
 BOTAOPESQUISA = (By.ID, "BTNPESQUISA")
+COR = (By.CLASS_NAME, "tag.col-3.col-sm-4.col-md-3.col-lg-5.text-truncate")
+QUANTIDADEKG = (By.CLASS_NAME, "bottom-wrap")
+FILTRO = (By.XPATH, "/html[1]/body[1]/div[3]/section[1]/div[1]/div[1]/div[4]/header[1]/div[1]/select[1]/option[3]")
 
 
-def main():
-    browser = webdriver.Chrome(options=options,)
-    browser.get('http://prontaentrega.diklatex.com.br/login')
-    time.sleep(7)
-    browser.refresh()
+
+def login(browser):
     WebDriverWait(browser, 100).until(EC.element_to_be_clickable(EMAILFIELD)).send_keys(email)
     WebDriverWait(browser, 100).until(EC.element_to_be_clickable(PASSWORDFIELD)).send_keys(senha)
     time.sleep(5)
     WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BOTAOLOGIN)).click()
-    WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BARRAPESQUISA)).send_keys(slide)
+
+def pesquisar(browser, tecido):
+    WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BARRAPESQUISA)).send_keys(tecido)
+    time.sleep(5) 
     WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BOTAOPESQUISA)).click()
-    
+    time.sleep(30) 
+
+
+def filtro(browser):
+    #Filtro de mais opção
+    WebDriverWait(browser, 100).until(EC.element_to_be_clickable(FILTRO)).click()
+    select_element = browser.find_element(By.XPATH, '/html[1]/body[1]/div[3]/section[1]/div[1]/div[1]/div[4]/header[1]/div[1]/select[1]')
+    seletor = Select(select_element)
+    seletor.select_by_index(len(seletor.options) - 1)
+    time.sleep(30) 
+
+def acharInformacoes(browser, tecido):
+    elementos = browser.find_elements(*COR)
+    encontrou = False
+    for elemento in elementos:
+        texto_elemento = elemento.text
+        for item in listaSlide:
+            if item.lower() in texto_elemento.lower():
+                encontrou = True
+                print(f"A opção '{item}' foi encontrada na página para o tecido {tecido}.")
+                try:
+                    quantidade = elemento.find_element(By.XPATH, './ancestor::figure//div[2]//span//small//b')
+                    texto_quantidade = quantidade.text
+                    print(f"A quantidade disponível no tecido {tecido} para a cor '{item}' é: {texto_quantidade}")
+                    print('-'*30)
+                except:
+                    print("Não foi possível encontrar a quantidade para essa cor.")
+                    print('-'*30)    
+
+
+    if not encontrou:
+        print("Nenhuma das opções foi encontrada.")
+        print('-'*30)
+        
     
 
-    # elements = WebDriverWait(browser, 10).until(
-    #     EC.presence_of_all_elements_located(BOTAOLOGIN)
-    # )
-    # second_element = elements[3]
-    # second_element.click()
-    # browser.navigate().refresh()
+def main():
+    browser = webdriver.Chrome(options=options)
+    browser.get('http://prontaentrega.diklatex.com.br/login')
+    time.sleep(3)
+    browser.refresh()
 
-    # # wait for email field and enter email
-    # # Click Next
-    # WebDriverWait(browser, 100).until(EC.element_to_be_clickable(NEXTBUTTON)).click()
-    # # wait for password field and enter password
-    # # Click Login - same id?
-    # WebDriverWait(browser, 100).until(EC.element_to_be_clickable(NEXTBUTTON)).click()
-    # #nao 
-    # WebDriverWait(browser, 100).until(EC.element_to_be_clickable(NAO)).click()
-    # #clicar no botão da matéria de macro
-    # WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BOTAOMACRO)).click()
-    # #clicar no botao de trabalho
-    # WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BOTAOTRABALHO)).click()
-    # #card trabalho
-    # cardTabalho = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.CLASS_NAME, "sc-bbSZdi jMzIvF cardTrabalho")))
-    # for o in cardTabalho:
-    #     cardTabalho.click()
-    #     print(o)
-    
+    #login
+    login(browser)
+
+    #slide
+    pesquisar(browser, slide)
+    filtro(browser)
+    acharInformacoes(browser, slide)
+    WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BARRAPESQUISA)).clear()
+
+    #grafiato
+    pesquisar(browser, grafiato)
+    filtro(browser)
+    acharInformacoes(browser, grafiato)
+    WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BARRAPESQUISA)).clear()
+
+    #laufen
+    pesquisar(browser, laufen)
+    filtro(browser)
+    acharInformacoes(browser, laufen)
+
+
+    browser.quit()
 
 main()
