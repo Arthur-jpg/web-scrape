@@ -1,9 +1,3 @@
-lista = ['Azul', 'Vermelho', 'Roxo']
-lista2 = ['Azul', 'Preto']
+import pywhatkit
+pywhatkit.sendwhatmsg_to_group_instantly(, f"A quantidade disponível no tecido para a cor '' é: ")
 
-for i in range(len(lista2)):
-    if lista2[i] in lista:
-        print('Sim')
-        print(lista2[i])
-    else:
-        print('No')

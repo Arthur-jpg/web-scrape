@@ -7,6 +7,8 @@ import time
 import os
 from dotenv import load_dotenv
 from selenium.webdriver.support.ui import Select
+import pywhatkit
+
 
 # Listas de cores e elementos
 listaSlide = ['White', 'Ultra Black', 'Mint']
@@ -21,6 +23,7 @@ senha = os.getenv("SENHA")
 slide = os.getenv("SLIDE")
 grafiato = os.getenv("GRAFIATO")
 laufen = os.getenv("LAUFEN")
+grupoid = os.getenv("CODGRUPO")
 
 # Configurações do WebDriver
 options = webdriver.ChromeOptions()
@@ -60,6 +63,9 @@ def filtro(browser):
     seletor.select_by_index(len(seletor.options) - 1)
     time.sleep(30) 
 
+def mandarMensagem(tecido, item, texto_quantidade):
+    pywhatkit.sendwhatmsg_to_group_instantly(grupoid, f"A quantidade disponível no tecido {tecido} para a cor '{item}' é: {texto_quantidade}")
+
 def acharInformacoes(browser, tecido):
     elementos = browser.find_elements(*COR)
     encontrou = False
@@ -74,6 +80,8 @@ def acharInformacoes(browser, tecido):
                     texto_quantidade = quantidade.text
                     print(f"A quantidade disponível no tecido {tecido} para a cor '{item}' é: {texto_quantidade}")
                     print('-'*30)
+                    mandarMensagem(tecido, item, texto_quantidade)
+                    time.sleep(30)
                 except:
                     print("Não foi possível encontrar a quantidade para essa cor.")
                     print('-'*30)    
@@ -82,8 +90,10 @@ def acharInformacoes(browser, tecido):
     if not encontrou:
         print("Nenhuma das opções foi encontrada.")
         print('-'*30)
-        
-    
+
+
+
+
 
 def main():
     browser = webdriver.Chrome(options=options)
