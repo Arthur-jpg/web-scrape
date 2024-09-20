@@ -38,3 +38,28 @@ Time: 19:12
 Group ID: DhUZmSyse9c2wIrQXJLlQD
 Message: A quantidade disponível no tecido para a cor '' é:
 --------------------
+Date: 20/9/2024
+Time: 10:14
+Group ID: DhUZmSyse9c2wIrQXJLlQD
+Message: A quantidade disponível no tecido slide para a cor 'Ultra Black' é: 13,89 kg(s)
+--------------------
+Date: 20/9/2024
+Time: 10:15
+Group ID: DhUZmSyse9c2wIrQXJLlQD
+Message: A quantidade disponível no tecido slide para a cor 'Mint' é: 13,57 kg(s)
+--------------------
+Date: 20/9/2024
+Time: 10:17
+Group ID: DhUZmSyse9c2wIrQXJLlQD
+Message: A quantidade disponível no tecido grafiato para a cor 'White' é: 10,26 kg(s)
+--------------------
+Date: 20/9/2024
+Time: 16:35
+Group ID: DhUZmSyse9c2wIrQXJLlQD
+Message: *slide* na cor *Mint* possui *13,57 kg(s)* disponíveis, *grafiato* na cor *Ultra Black* possui *14,29 kg(s)* disponíveis, *grafiato* na cor *White* possui *10,26 kg(s)* disponíveis, *laufen* na cor *Mint* possui *42,59 kg(s)* disponíveis
+--------------------
+Date: 20/9/2024
+Time: 16:42
+Group ID: KLj4kSXPIzGKJAMr6U32SH
+Message: *slide* na cor *Mint* possui *13,57 kg(s)* disponíveis, *grafiato* na cor *Ultra Black* possui *14,29 kg(s)* disponíveis, *grafiato* na cor *White* possui *10,26 kg(s)* disponíveis, *laufen* na cor *Mint* possui *42,59 kg(s)* disponíveis
+--------------------

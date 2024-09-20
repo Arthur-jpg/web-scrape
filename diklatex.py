@@ -15,6 +15,9 @@ listaSlide = ['White', 'Ultra Black', 'Mint']
 listaGrafiato = []
 listaLaufen = []
 
+listaMensagem = []
+listaMensagens = []
+
 # Carregar variáveis de ambiente
 load_dotenv()
 
@@ -63,8 +66,24 @@ def filtro(browser):
     seletor.select_by_index(len(seletor.options) - 1)
     time.sleep(30) 
 
-def mandarMensagem(tecido, item, texto_quantidade):
-    pywhatkit.sendwhatmsg_to_group_instantly(grupoid, f"A quantidade disponível no tecido {tecido} para a cor '{item}' é: {texto_quantidade}")
+def mandarParaLista(tecido, item, texto_quantidade):
+    variavel = [tecido, item, texto_quantidade]
+    listaMensagem.append(variavel)
+
+def mensagemTexto():
+    x = len(listaMensagem) - 1
+    y = f'*{listaMensagem[x][0]}* na cor *{listaMensagem[x][1]}* possui *{listaMensagem[x][2]}* disponíveis'
+    listaMensagens.append(y)
+
+def printarMensagem():
+    result = ', '.join(map(str, listaMensagens))
+    print(result)
+
+
+
+def mandarMensagem():
+    result = ', '.join(map(str, listaMensagens))
+    pywhatkit.sendwhatmsg_to_group_instantly(grupoid, result)
 
 def acharInformacoes(browser, tecido):
     elementos = browser.find_elements(*COR)
@@ -78,12 +97,12 @@ def acharInformacoes(browser, tecido):
                 try:
                     quantidade = elemento.find_element(By.XPATH, './ancestor::figure//div[2]//span//small//b')
                     texto_quantidade = quantidade.text
-                    print(f"A quantidade disponível no tecido {tecido} para a cor '{item}' é: {texto_quantidade}")
+                    mandarParaLista(tecido, item, texto_quantidade)
+                    mensagemTexto()
                     print('-'*30)
-                    mandarMensagem(tecido, item, texto_quantidade)
-                    time.sleep(30)
+                    
                 except:
-                    print("Não foi possível encontrar a quantidade para essa cor.")
+                    texto_quantidade = 'não foram encontradas quantidades disponíveis'
                     print('-'*30)    
 
 
@@ -121,6 +140,8 @@ def main():
     filtro(browser)
     acharInformacoes(browser, laufen)
 
+    # printarMensagem()
+    mandarMensagem()
 
     browser.quit()
 
