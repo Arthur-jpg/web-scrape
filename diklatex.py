@@ -12,8 +12,8 @@ import pywhatkit
 
 # Listas de cores e elementos
 listaSlide = ['White', 'Ultra Black', 'Mint']
-listaGrafiato = []
-listaLaufen = []
+listaGrafiato = ['Branco', 'Ultra Black', 'Madrugada']
+listaLaufen = ['Branco', 'Marinho Max']
 
 listaMensagem = []
 listaMensagens = []
@@ -72,34 +72,34 @@ def mandarParaLista(tecido, item, texto_quantidade):
 
 def mensagemTexto():
     x = len(listaMensagem) - 1
-    y = f'*{listaMensagem[x][0]}* na cor *{listaMensagem[x][1]}* possui *{listaMensagem[x][2]}* disponíveis'
+    y = f'*{listaMensagem[x][0]}* na cor *{listaMensagem[x][1]}* possui *{listaMensagem[x][2]}* disponíveis \n'
     listaMensagens.append(y)
 
 def printarMensagem():
-    result = ', '.join(map(str, listaMensagens))
+    result = ''.join(map(str, listaMensagens))
     print(result)
 
 
 
 def mandarMensagem():
-    result = ', '.join(map(str, listaMensagens))
+    result = ''.join(map(str, listaMensagens))
     pywhatkit.sendwhatmsg_to_group_instantly(grupoid, result)
 
-def acharInformacoes(browser, tecido):
+def acharInformacoes(browser, tecido, lista):
     elementos = browser.find_elements(*COR)
     encontrou = False
     for elemento in elementos:
         texto_elemento = elemento.text
-        for item in listaSlide:
+        for item in lista:
             if item.lower() in texto_elemento.lower():
                 encontrou = True
-                print(f"A opção '{item}' foi encontrada na página para o tecido {tecido}.")
+                # print(f"A opção '{item}' foi encontrada na página para o tecido {tecido}.")
                 try:
                     quantidade = elemento.find_element(By.XPATH, './ancestor::figure//div[2]//span//small//b')
                     texto_quantidade = quantidade.text
                     mandarParaLista(tecido, item, texto_quantidade)
                     mensagemTexto()
-                    print('-'*30)
+                    # print('-'*30)
                     
                 except:
                     texto_quantidade = 'não foram encontradas quantidades disponíveis'
@@ -126,19 +126,19 @@ def main():
     #slide
     pesquisar(browser, slide)
     filtro(browser)
-    acharInformacoes(browser, slide)
+    acharInformacoes(browser, slide, listaSlide)
     WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BARRAPESQUISA)).clear()
 
     #grafiato
     pesquisar(browser, grafiato)
     filtro(browser)
-    acharInformacoes(browser, grafiato)
+    acharInformacoes(browser, grafiato, listaGrafiato)
     WebDriverWait(browser, 100).until(EC.element_to_be_clickable(BARRAPESQUISA)).clear()
 
     #laufen
     pesquisar(browser, laufen)
     filtro(browser)
-    acharInformacoes(browser, laufen)
+    acharInformacoes(browser, laufen, listaLaufen)
 
     # printarMensagem()
     mandarMensagem()

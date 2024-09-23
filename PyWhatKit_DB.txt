@@ -63,3 +63,28 @@ Time: 16:42
 Group ID: KLj4kSXPIzGKJAMr6U32SH
 Message: *slide* na cor *Mint* possui *13,57 kg(s)* disponíveis, *grafiato* na cor *Ultra Black* possui *14,29 kg(s)* disponíveis, *grafiato* na cor *White* possui *10,26 kg(s)* disponíveis, *laufen* na cor *Mint* possui *42,59 kg(s)* disponíveis
 --------------------
+Date: 23/9/2024
+Time: 15:37
+Group ID: KLj4kSXPIzGKJAMr6U32SH
+Message: *slide* na cor *Mint* possui *13,57 kg(s)* disponíveis, *grafiato* na cor *White* possui *54,64 kg(s)* disponíveis, *laufen* na cor *Mint* possui *42,59 kg(s)* disponíveis
+--------------------
+Date: 23/9/2024
+Time: 17:10
+Group ID: KLj4kSXPIzGKJAMr6U32SH
+Message: *slide* na cor *Mint* possui *13,57 kg(s)* disponíveis , *grafiato* na cor *Branco* possui *25,07 kg(s)* disponíveis , *grafiato* na cor *Madrugada* possui *2,40 kg(s)* disponíveis , *laufen* na cor *Marinho Max* possui *44,39 kg(s)* disponíveis , *laufen* na cor *Branco* possui *12,37 kg(s)* disponíveis , *laufen* na cor *Marinho Max* possui *2,67 kg(s)* disponíveis
+--------------------
+Date: 23/9/2024
+Time: 17:17
+Group ID: KLj4kSXPIzGKJAMr6U32SH
+Message: *slide* na cor *Mint* possui *13,57 kg(s)* disponíveis , *grafiato* na cor *Branco* possui *25,07 kg(s)* disponíveis , *grafiato* na cor *Madrugada* possui *2,40 kg(s)* disponíveis , *laufen* na cor *Marinho Max* possui *44,39 kg(s)* disponíveis , *laufen* na cor *Branco* possui *12,37 kg(s)* disponíveis , *laufen* na cor *Marinho Max* possui *2,67 kg(s)* disponíveis
+--------------------
+Date: 23/9/2024
+Time: 17:23
+Group ID: KLj4kSXPIzGKJAMr6U32SH
+Message: *grafiato* na cor *Branco* possui *25,07 kg(s)* disponíveis *grafiato* na cor *Madrugada* possui *2,40 kg(s)* disponíveis *laufen* na cor *Marinho Max* possui *44,39 kg(s)* disponíveis *laufen* na cor *Branco* possui *12,37 kg(s)* disponíveis *laufen* na cor *Marinho Max* possui *2,67 kg(s)* disponíveis
+--------------------
+Date: 23/9/2024
+Time: 17:34
+Group ID: KLj4kSXPIzGKJAMr6U32SH
+Message: *slide* na cor *Mint* possui *13,57 kg(s)* disponíveis *grafiato* na cor *Branco* possui *25,07 kg(s)* disponíveis *grafiato* na cor *Madrugada* possui *2,40 kg(s)* disponíveis *laufen* na cor *Marinho Max* possui *44,39 kg(s)* disponíveis *laufen* na cor *Branco* possui *12,37 kg(s)* disponíveis *laufen* na cor *Marinho Max* possui *2,67 kg(s)* disponíveis
+--------------------
